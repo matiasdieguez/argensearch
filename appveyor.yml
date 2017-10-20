@@ -15,7 +15,7 @@ build:
   include_nuget_references: true
   verbosity: minimal
 before_package:
-- cmd: dotnet pack src -c release
+- cmd: nuget spec src/lib
 deploy:
 - provider: NuGet
   api_key:
