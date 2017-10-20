@@ -15,7 +15,7 @@ build:
   include_nuget_references: true
   verbosity: minimal
 before_package:
-- cmd: nuget spec src/lib
+- cmd: nuget spec src/lib/ArgenSearch.csproj
 deploy:
 - provider: NuGet
   api_key:
