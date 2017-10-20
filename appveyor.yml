@@ -10,9 +10,9 @@ install:
 - cmd: appveyor downloadfile https://dist.nuget.org/win-x86-commandline/v4.3.0/nuget.exe
 before_build:
 - cmd: nuget restore src
-before_package:
-- cmd: nuget spec src/lib/ArgenSearch
-- cmd: appveyor PushArtifact src/lib/ArgenSearch.nupkg
+# before_package:
+# - cmd: nuget spec src/lib/ArgenSearch
+# - cmd: appveyor PushArtifact src/lib/ArgenSearch.nupkg
 build:
   publish_nuget: true
   publish_nuget_symbols: true
