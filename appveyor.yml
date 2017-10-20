@@ -10,6 +10,7 @@ install:
 before_build:
 - cmd: nuget restore src
 build:
+  publish_nuget: true
   verbosity: minimal
 deploy:
 - provider: NuGet
