@@ -1,0 +1,24 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+configuration: Release
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+install:
+- cmd: appveyor downloadfile https://dist.nuget.org/win-x86-commandline/v4.3.0/nuget.exe
+before_build:
+- cmd: nuget restore src
+# before_package:
+# - cmd: nuget spec src/lib/ArgenSearch
+# - cmd: appveyor PushArtifact src/lib/ArgenSearch.nupkg
+build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: minimal
+deploy:
+- provider: NuGet
+  api_key:
+    secure: aimcJt2jF4Ir1ZSTFIRgga4b8NsOEQA2okwSLVeXyI0qdM5jVn5OtEaMDjuLNmXr
