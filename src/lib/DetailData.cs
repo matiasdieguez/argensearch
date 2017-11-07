@@ -10,8 +10,8 @@
         public string TipoDocumento { get; set; }
         public string NumeroDocumento { get; set; }
         public DomicilioFiscal DomicilioFiscal { get; set; }
-        public int IdDependencia { get; set; }
-        public int MesCierre { get; set; }
+        public int? IdDependencia { get; set; }
+        public int? MesCierre { get; set; }
         public string FechaInscripcion { get; set; }
     }
 }

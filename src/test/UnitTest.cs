@@ -15,6 +15,9 @@ namespace Tests
 
             var datos = ArgenSearchClient.Detail(id).Result;
             Assert.IsTrue(datos.Success);
+
+            var notExists = ArgenSearchClient.Search(1234567812).Result;
+            Assert.IsFalse(notExists.Success);
         }
     }
 }

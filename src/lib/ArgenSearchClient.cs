@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
+using System;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ArgenSearch
 {
@@ -16,14 +18,22 @@ namespace ArgenSearch
         /// <returns>List of associated CUIT or CUIL</returns>
         public static async Task<SearchResponse> Search(int id)
         {
-            using (var client = new HttpClient())
+            try
             {
-                var response = await client.GetAsync("https://soa.afip.gob.ar/sr-padron/v2/personas/" + id);
-                response.EnsureSuccessStatusCode();
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync("https://soa.afip.gob.ar/sr-padron/v2/personas/" + id);
+                    response.EnsureSuccessStatusCode();
 
-                var json = await response.Content.ReadAsStringAsync();
+                    var json = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<SearchResponse>(json);
+                    return JsonConvert.DeserializeObject<SearchResponse>(json);
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return new SearchResponse { Success = false };
             }
         }
 
@@ -34,14 +44,22 @@ namespace ArgenSearch
         /// <returns>Person detail</returns>
         public static async Task<DetailResponse> Detail(long id)
         {
-            using (var client = new HttpClient())
+            try
             {
-                var response = await client.GetAsync("https://soa.afip.gob.ar/sr-padron/v2/persona/" + id);
-                response.EnsureSuccessStatusCode();
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync("https://soa.afip.gob.ar/sr-padron/v2/persona/" + id);
+                    response.EnsureSuccessStatusCode();
 
-                var json = await response.Content.ReadAsStringAsync();
+                    var json = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<DetailResponse>(json);
+                    return JsonConvert.DeserializeObject<DetailResponse>(json);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return new DetailResponse { Success = false };
             }
         }
     }
